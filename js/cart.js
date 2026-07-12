@@ -1,6 +1,6 @@
 (function () {
   var CART_KEY = "homely_cart";
-  var WHATSAPP_DIGITS = "8562012345678";
+  var WHATSAPP_DIGITS = "8562094059629";
 
   function getLang() {
     return document.documentElement.getAttribute("data-lang") || "en";
