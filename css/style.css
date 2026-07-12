@@ -149,26 +149,25 @@ p .lang-lo,p .lang-en,p .lang-vi,
 }
 .menu-list{border:1px solid var(--gold);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;background:#fff;}
 .menu-item{
-  display:flex;align-items:flex-start;gap:1rem;
-  padding:.9rem 1.1rem;border-bottom:1px solid var(--cream-alt);
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;
+  padding:2rem;border-bottom:1px solid var(--cream-alt);
 }
 .menu-item:last-child{border-bottom:none;}
 .menu-item:nth-child(even){background:#fffaf0;}
 .menu-item-photo{
-  flex:0 0 84px;width:84px;height:84px;border-radius:8px;overflow:hidden;
-  background:var(--cream-alt);border:1px solid var(--gold);
+  width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
+  background:var(--cream-alt);border:2px solid var(--gold);box-shadow:var(--shadow);
 }
 .menu-item-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .menu-item-body{
-  flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;
-  gap:1rem;flex-wrap:wrap;
+  min-width:0;display:flex;flex-direction:column;gap:.7rem;align-items:flex-start;
 }
 .menu-item-name p{margin:0;line-height:1.4;}
-.dish-lo{font-weight:700;color:var(--brown-dark);font-size:1.02rem;}
-.dish-en{font-size:.88rem;color:var(--teal);}
-.dish-vi{font-size:.88rem;color:var(--brown);}
+.dish-lo{font-weight:700;color:var(--brown-dark);font-size:1.4rem;}
+.dish-en{font-size:1.1rem;color:var(--teal);}
+.dish-vi{font-size:1.1rem;color:var(--brown);}
 .menu-item-price{
-  white-space:nowrap;font-weight:700;color:var(--red);text-align:right;font-size:.92rem;min-width:140px;
+  white-space:nowrap;font-weight:700;color:var(--red);text-align:left;font-size:1.15rem;
 }
 
 /* ---------- contact ---------- */
@@ -195,6 +194,7 @@ p .lang-lo,p .lang-en,p .lang-vi,
   .grid-3{grid-template-columns:1fr 1fr;}
   .grid-4{grid-template-columns:1fr 1fr;}
   .footer-inner{grid-template-columns:1fr;}
+  .menu-item{grid-template-columns:1fr;padding:1.2rem;gap:1rem;}
 }
 @media (max-width:680px){
   .main-nav{
@@ -208,7 +208,6 @@ p .lang-lo,p .lang-en,p .lang-vi,
   .grid-3{grid-template-columns:1fr;}
   .grid-4{grid-template-columns:1fr 1fr;}
   .hero h1{font-size:2rem;}
-  .menu-item{flex-direction:column;align-items:flex-start;}
   .menu-item-price{text-align:left;}
 }
 
