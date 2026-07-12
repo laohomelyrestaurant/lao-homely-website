@@ -140,6 +140,12 @@ p .lang-lo,p .lang-en,p .lang-vi,
 .ph-label{font-weight:700;font-size:.85rem;}
 .ph-hint{font-size:.72rem;color:var(--brown);opacity:.75;}
 .map-placeholder{height:100%;}
+.map-embed-wrap{
+  width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
+  border:2px solid var(--gold);box-shadow:var(--shadow);
+}
+.map-embed-wrap iframe{width:100%;height:100%;display:block;}
+.map-link{margin-top:1rem;}
 
 /* ---------- menu page ---------- */
 .menu-section{margin-bottom:2.6rem;}
