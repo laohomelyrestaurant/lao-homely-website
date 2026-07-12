@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In ma QR dat mon theo ban - Nhà Hàng Lao Homely</title>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f2f2f2;color:#222;}
+  .toolbar{
+    padding:1rem 1.5rem;background:#7a1f1f;color:#fff;display:flex;
+    justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;
+  }
+  .toolbar h1{margin:0;font-size:1.3rem;}
+  .print-btn{
+    padding:.6rem 1.4rem;border:none;border-radius:6px;background:#d4a017;
+    color:#2a1500;font-weight:700;cursor:pointer;font-size:1rem;
+  }
+  .qr-grid{
+    display:grid;grid-template-columns:repeat(2, 1fr);gap:1.2rem;
+    padding:1.5rem;max-width:900px;margin:0 auto;
+  }
+  .qr-card{
+    background:#fff;border:2px solid #7a1f1f;border-radius:14px;
+    padding:1.4rem;text-align:center;break-inside:avoid;
+  }
+  .qr-card-eyebrow{margin:0 0 .3rem;font-size:.9rem;color:#7a1f1f;font-weight:700;letter-spacing:.03em;}
+  .qr-card-img{width:100%;max-width:260px;height:auto;margin:.4rem 0;}
+  .qr-card-table{margin:.3rem 0;font-size:1.6rem;font-weight:800;color:#7a1f1f;}
+  .qr-card-hint{margin:0;font-size:.85rem;color:#555;line-height:1.4;}
+  @media print{
+    .toolbar{display:none;}
+    body{background:#fff;}
+    .qr-grid{padding:0;max-width:100%;}
+    .qr-card:nth-child(4n+1){page-break-before:always;}
+    .qr-card:nth-child(-n+4){page-break-before:avoid;}
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <h1>In ma QR dat mon theo ban (10 ban)</h1>
+    <button class="print-btn" type="button" onclick="window.print()">In trang nay</button>
+  </div>
+  <div class="qr-grid">
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-1.png" alt="QR ban so 1">
+        <p class="qr-card-table">BAN SO 1</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-2.png" alt="QR ban so 2">
+        <p class="qr-card-table">BAN SO 2</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-3.png" alt="QR ban so 3">
+        <p class="qr-card-table">BAN SO 3</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-4.png" alt="QR ban so 4">
+        <p class="qr-card-table">BAN SO 4</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-5.png" alt="QR ban so 5">
+        <p class="qr-card-table">BAN SO 5</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-6.png" alt="QR ban so 6">
+        <p class="qr-card-table">BAN SO 6</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-7.png" alt="QR ban so 7">
+        <p class="qr-card-table">BAN SO 7</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-8.png" alt="QR ban so 8">
+        <p class="qr-card-table">BAN SO 8</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-9.png" alt="QR ban so 9">
+        <p class="qr-card-table">BAN SO 9</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+      <div class="qr-card">
+        <p class="qr-card-eyebrow">Nhà Hàng Lao Homely</p>
+        <img class="qr-card-img" src="images/qr/ban-10.png" alt="QR ban so 10">
+        <p class="qr-card-table">BAN SO 10</p>
+        <p class="qr-card-hint">Quet ma QR de xem thuc don va dat mon<br>Thanh toan tai quay sau khi dung bua</p>
+      </div>
+  </div>
+</body>
+</html>
