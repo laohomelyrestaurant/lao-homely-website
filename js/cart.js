@@ -360,18 +360,20 @@
     });
   }
 
+  /* Tin nhan gui cho bep LUON LUON bang tieng Lao (dung nameLo), bat ke khach
+     dang xem trang bang ngon ngu nao (Lao/Anh/Viet), vi dau bep la nguoi Lao. */
   function buildKitchenWhatsAppText(order) {
     var lines = [];
-    lines.push("*DON DAT MON - BAN SO " + order.table + "*");
-    lines.push("Ma don: " + order.code);
+    lines.push("*ອໍເດີໃໝ່ - ໂຕະທີ " + order.table + "*");
+    lines.push("ລະຫັດອໍເດີ: " + order.code);
     lines.push("");
     order.items.forEach(function (it) {
-      lines.push("- " + it.nameVi + " x" + it.qty + " = " + fmtPrice(it.subtotal));
+      lines.push("- " + it.nameLo + " x" + it.qty + " = " + fmtPrice(it.subtotal));
     });
     lines.push("");
-    lines.push("Tong cong: " + fmtPrice(order.total));
+    lines.push("ລວມທັງໝົດ: " + fmtPrice(order.total));
     lines.push("");
-    lines.push("(Gui tu he thong dat mon QR - Lao Homely Restaurant)");
+    lines.push("(ສົ່ງຈາກລະບົບສັ່ງອາຫານ QR - ຮ້ານອາຫານລາວໂຮມລີ້)");
     return lines.join("\n");
   }
 
