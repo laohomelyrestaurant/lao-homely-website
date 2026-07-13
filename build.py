@@ -38,7 +38,7 @@ FIREBASE_CONFIG = {
 }
 SITE_BASE_URL = "https://nguyenvietnga22121976-cuongtv.github.io/lao-homely-website/"
 NUM_TABLES = 10
-ASSET_VERSION = "20260713b"  # bump this string whenever css/js changes, to bust browser cache
+ASSET_VERSION = "20260713c"  # bump this string whenever css/js changes, to bust browser cache
 
 NAV = [
     ("index.html", "ໜ້າຫຼັກ", "Home", "Trang chủ"),
