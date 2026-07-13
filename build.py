@@ -38,7 +38,7 @@ FIREBASE_CONFIG = {
 }
 SITE_BASE_URL = "https://nguyenvietnga22121976-cuongtv.github.io/lao-homely-website/"
 NUM_TABLES = 10
-ASSET_VERSION = "20260713e"  # bump this string whenever css/js changes, to bust browser cache
+ASSET_VERSION = "20260714a"  # bump this string whenever css/js changes, to bust browser cache
 
 NAV = [
     ("index.html", "ໜ້າຫຼັກ", "Home", "Trang chủ"),
@@ -153,15 +153,15 @@ MENU = [
              note=tri("(ໄຂ່ດາວເພີ່ມ +7,000 kip)", "(extra fried egg +7,000 kip)", "(thêm trứng ốp la +7,000 kip)")),
         dict(id="fried-rice-rice", lo="ເຂົ້າຜັດ (ທະເລ/ໝູ/ໄກ່)", en="Fried Rice (seafood / pork / chicken)", vi="Cơm chiên (hải sản/heo/gà)", kind="variant",
              variants=[("ທະເລ", "Seafood", "Hải sản", 50000), ("ໝູ", "Pork", "Heo", 45000), ("ໄກ່", "Chicken", "Gà", 45000)]),
-        dict(id="curry-fried-rice", lo="ເຂົ້າຜັດຜົງກະຫລີ່ (ທະເລ/ໝູ/ໄກ່)", en="Curry Powder Fried Rice (seafood / pork / chicken)", vi="Cơm chiên bột cà ri (hải sản/heo/gà)", kind="variant",
+        dict(id="curry-fried-rice", lo="ເຂົ້າຜັດຜົງກະຫລິ (ທະເລ/ໝູ/ໄກ່)", en="Curry Powder Fried Rice (seafood / pork / chicken)", vi="Cơm chiên bột cà ri (hải sản/heo/gà)", kind="variant",
              variants=[("ທະເລ", "Seafood", "Hải sản", 55000), ("ໝູ", "Pork", "Heo", 45000), ("ໄກ່", "Chicken", "Gà", 45000)]),
         dict(id="stir-fry-curry-eggplant-rice", lo="ເຂົ້າຜັດເຜັດ (ໝູ/ໄກ່) ໝາກເຂືອລາວ", en="Stir-fried Pork/Chicken with Curry Paste & Lao Eggplant, with rice", vi="Cơm thịt heo/gà xào cà ri cà tím Lào", kind="simple", price=45000),
-        dict(id="beef-oyster-sauce-rice", lo="ເຂົ້າຂົ້ວຜັດນ້ຳມັນຫອຍງົວ", en="Stir-fried Beef with Oyster Sauce, with rice", vi="Cơm bò xào dầu hào", kind="simple", price=55000),
+        dict(id="beef-oyster-sauce-rice", lo="ເຂົ້າງົວຜັດນ້ຳມັນຫອຍ", en="Stir-fried Beef with Oyster Sauce, with rice", vi="Cơm bò xào dầu hào", kind="simple", price=55000),
         dict(id="green-curry", lo="ແກງຂຽວຫວານ (ໝູ/ໄກ່)", en="Green Curry (pork / chicken)", vi="Cà ri xanh (heo/gà)", kind="variant",
              variants=[("ໝູ", "Pork", "Heo", 50000), ("ໄກ່", "Chicken", "Gà", 50000)]),
-        dict(id="squid-salted-egg-rice", lo="ເຂົ້າໝີ່ກພັດໄຂ່ເຄັມ", en="Stir-fried Squid with Salted Egg, with rice", vi="Cơm mực xào trứng muối", kind="simple", price=50000),
+        dict(id="squid-salted-egg-rice", lo="ເຂົ້າມິກຜັດໄຂ່ເຄັມ", en="Stir-fried Squid with Salted Egg, with rice", vi="Cơm mực xào trứng muối", kind="simple", price=50000),
         dict(id="kale-crispy-pork-rice", lo="ເຂົ້າກະນາໝູກຮອບ + ໄຂ່", en="Stir-fried Chinese Kale with Crispy Pork Belly, with rice + egg", vi="Cơm cải kale xào thịt ba chỉ giòn + trứng", kind="simple", price=50000, note=tri("(ລວມໄຂ່ +7,000 kip)", "(egg included, +7,000 kip)", "(đã gồm phụ phí trứng +7,000 kip)")),
-        dict(id="sweet-sour-fish-rice", lo="ເຂົ້າປຽວຫວານປາ", en="Fish with Sweet & Sour Sauce, with rice", vi="Cơm cá sốt chua ngọt", kind="simple", price=60000),
+        dict(id="sweet-sour-fish-rice", lo="ເຂົ້າປົ້ຽວຫວານປາ", en="Fish with Sweet & Sour Sauce, with rice", vi="Cơm cá sốt chua ngọt", kind="simple", price=60000),
         dict(id="pork-teriyaki-rice", lo="ເຂົ້າໝູເທຣິຢະກິ", en="Pork Teriyaki, with rice", vi="Cơm thịt heo teriyaki", kind="simple", price=50000),
         dict(id="mushroom-rice", lo="ເຂົ້າຂົ້ວເຫັດ", en="Stir-fried Mushrooms, with rice", vi="Cơm nấm xào", kind="simple", price=45000),
         dict(id="mixed-veg-rice", lo="ເຂົ້າຂົ້ວຜັກລວມ", en="Stir-fried Mixed Vegetables, with rice", vi="Cơm rau củ xào thập cẩm", kind="simple", price=55000),
@@ -170,9 +170,9 @@ MENU = [
         dict(id="chicken-wings-rice", lo="ເຂົ້າທອດປີກໄກ່", en="Fried Chicken Wings, with rice", vi="Cơm cánh gà chiên", kind="simple", price=50000),
     ]),
     ("ເຝີ ແລະ ອາຫານຫວຽດນາມ", "Vietnamese Noodle Soups", "Phở & Bún Việt", [
-        dict(id="pho-chicken", lo="ເຝີໄກ່", en="Vietnamese Pho with Chicken", vi="Phở gà", kind="simple", price=50000),
-        dict(id="pho-beef", lo="ເຝີງົວ", en="Vietnamese Pho with Beef", vi="Phở bò", kind="simple", price=55000),
-        dict(id="banh-canh", lo="ບັ່ນກັບ", en="Banh Canh", vi="Bánh canh", kind="simple", price=40000),
+        dict(id="pho-chicken", lo="ເຝີໄກ່ຫວຽດ", en="Vietnamese Pho with Chicken", vi="Phở gà", kind="simple", price=50000),
+        dict(id="pho-beef", lo="ເຝີງົວຫວຽດ", en="Vietnamese Pho with Beef", vi="Phở bò", kind="simple", price=55000),
+        dict(id="banh-canh", lo="ບັ່ນກັນ", en="Banh Canh", vi="Bánh canh", kind="simple", price=40000),
     ]),
     ("ສະປາເກັຕິ", "Spaghetti", "Mì Ý (Spaghetti)", [
         dict(id="tomato-spaghetti", lo="ສະປາເກັຕິຊອດໝາກເລັ່ນ", en="Tomato Spaghetti", vi="Spaghetti sốt cà chua", kind="simple", price=50000),
@@ -187,15 +187,15 @@ MENU = [
              variants=[("ໝູ", "Pork", "Heo", 45000), ("ໄກ່", "Chicken", "Gà", 45000)]),
     ]),
     ("ຢຳ ແລະ ສະຫຼັດລາວ", "Lao Salads", "Gỏi & Salad Lào", [
-        dict(id="larb-moo", lo="ຫລວຍໝູ", en="Lao Minced Meat Salad (Larb Moo)", vi="Gỏi thịt băm kiểu Lào (Larb)", kind="simple", price=50000),
-        dict(id="mekong-fish-salad", lo="ຫລວຍປາແມ່ນ້ຳຂອງ", en="Mekong Fish Salad", vi="Gỏi cá sông Mekong", kind="simple", price=120000),
+        dict(id="larb-moo", lo="ກ້ອຍໝູ", en="Lao Minced Meat Salad (Larb Moo)", vi="Gỏi thịt băm kiểu Lào (Larb)", kind="simple", price=50000),
+        dict(id="mekong-fish-salad", lo="ກ້ອຍປາແມ່ນ້ຳຂອງ", en="Mekong Fish Salad", vi="Gỏi cá sông Mekong", kind="simple", price=120000),
         dict(id="grilled-eggplant-dip", lo="ປົ່ນຫມາກເຂືອ", en="Lao Grilled Eggplant Dip", vi="Chẳm cà tím nướng kiểu Lào", kind="simple", price=50000),
-        dict(id="xoup-phak", lo="ຂູບຜັກລາວ (Xoup Phak)", en="Lao Vegetable Salad (Xoup Phak)", vi="Gỏi rau kiểu Lào (Xoup Phak)", kind="simple", price=45000),
+        dict(id="xoup-phak", lo="ຂຸບຜັກລາວ (Xoup Phak)", en="Lao Vegetable Salad (Xoup Phak)", vi="Gỏi rau kiểu Lào (Xoup Phak)", kind="simple", price=45000),
         dict(id="lao-salad", lo="ຢຳສະຫຼັດລາວ", en="Lao Salad", vi="Gỏi Lào", kind="simple", price=75000),
         dict(id="yum-seafood", lo="ຢຳທະເລ", en="Yum Seafood", vi="Gỏi hải sản kiểu Lào-Thái", kind="simple", price=80000),
     ]),
     ("ຂອງກິນຫຼີ້ນ ແລະ ຂອງທອດ", "Snacks & Fried Sides", "Món ăn chơi & chiên (không kèm cơm)", [
-        dict(id="spring-rolls", lo="ຫໍ່ເປາະເປຍ", en="Spring Rolls", vi="Chả giò (nem rán)", kind="simple", price=60000),
+        dict(id="spring-rolls", lo="ທອດປໍເປຍ", en="Spring Rolls", vi="Chả giò (nem rán)", kind="simple", price=60000),
         dict(id="chicken-wings-side", lo="ທອດປີກໄກ່", en="Fried Chicken Wings (no rice)", vi="Cánh gà chiên (dùng riêng)", kind="simple", price=50000),
         dict(id="french-fries", lo="ທອດມັນຝຣັ່ງ", en="French Fries", vi="Khoai tây chiên", kind="simple", price=50000),
         dict(id="mushroom-side", lo="ຂົ້ວເຫັດ", en="Stir-fried Mushroom (no rice)", vi="Nấm xào (dùng riêng, không cơm)", kind="simple", price=50000),
@@ -203,8 +203,8 @@ MENU = [
         dict(id="morning-glory-side", lo="ຜັກບົ້ງໄຟແດງ", en="Stir-fried Morning Glory (no rice)", vi="Rau muống xào (dùng riêng, không cơm)", kind="simple", price=50000),
         dict(id="pad-krapao-side", lo="ຜັດກະເພົາ (ໝູ/ໄກ່/ທະເລ)", en="Pad Krapao pork/chicken/seafood (no rice)", vi="Thịt xào lá quế (heo/gà/hải sản, dùng riêng)", kind="variant",
              variants=[("ໝູ", "Pork", "Heo", 60000), ("ໄກ່", "Chicken", "Gà", 60000), ("ທະເລ", "Seafood", "Hải sản", 60000)]),
-        dict(id="squid-salted-egg-side", lo="ມິກພັດໄຂ່ເຄັມ", en="Stir-fried Squid with Salted Egg (no rice)", vi="Mực xào trứng muối (dùng riêng, không cơm)", kind="simple", price=70000),
-        dict(id="sweet-sour-fish-side", lo="ປົ້ວຫວານປາ", en="Fish with Sweet & Sour Sauce (no rice)", vi="Cá sốt chua ngọt (dùng riêng, không cơm)", kind="simple", price=80000),
+        dict(id="squid-salted-egg-side", lo="ມິກຜັດໄຂ່ເຄັມ", en="Stir-fried Squid with Salted Egg (no rice)", vi="Mực xào trứng muối (dùng riêng, không cơm)", kind="simple", price=70000),
+        dict(id="sweet-sour-fish-side", lo="ປົ້ຽວຫວານປາ", en="Fish with Sweet & Sour Sauce (no rice)", vi="Cá sốt chua ngọt (dùng riêng, không cơm)", kind="simple", price=80000),
     ]),
     ("ອາຫານພິເສດ", "Specialties", "Đặc sản", [
         dict(id="beef-steak", lo="ສະເຕັກງົວ", en="Beef Steak", vi="Bò bít tết", kind="simple", price=100000),
@@ -212,6 +212,8 @@ MENU = [
         dict(id="fried-sour-fish", lo="ຈືນສົ້ມປາ", en="Fried Sour Fish", vi="Cá chua chiên giòn", kind="simple", price=70000),
     ]),
     ("ອ່ອມ ແລະ ຕົ້ມ", "Soups", "Canh & Súp", [
+        dict(id="fish-maw-soup", lo="ຂຸບກະເພາະປາ", en="Fish Maw Soup", vi="Súp bong bóng cá", kind="variant",
+             variants=[("ນ້ອຍ", "Small", "Nhỏ", 50000), ("ໃຫຍ່", "Big", "Lớn", 70000)]),
         dict(id="lao-style-soup", lo="ອ່ອມ (ໝູ/ໄກ່/ງົວ)", en="Lao-style Soup (pork / chicken / beef)", vi="Súp kiểu Lào (heo/gà/bò)", kind="variant",
              variants=[("ໝູ", "Pork", "Heo", 45000), ("ໄກ່", "Chicken", "Gà", 50000), ("ງົວ", "Beef", "Bò", 55000)]),
         dict(id="pork-ribs-broth", lo="ຕົ້ມແຊບກະດູກໝູ", en="Fiery Pork Ribs Broth", vi="Canh sườn heo cay kiểu Lào-Thái", kind="simple", price=50000),
@@ -226,13 +228,13 @@ MENU = [
     ]),
     ("ເຄື່ອງດື່ມ", "Drinks", "Đồ uống", [
         dict(id="cappuccino", lo="ຄາປູຊິໂນ (ຮ້ອນ/ເຢັນ)", en="Cappuccino (iced / hot)", vi="Cappuccino (đá/nóng)", kind="simple", price=35000),
-        dict(id="americano", lo="ອາເມຣິກາໂນ (ຮ້ອນ/ເຢັນ)", en="Americano (iced / hot)", vi="Americano (đá/nóng)", kind="simple", price=30000),
+        dict(id="americano", lo="ກາເຟດຳ (ຮ້ອນ/ເຢັນ)", en="Americano (iced / hot)", vi="Americano (đá/nóng)", kind="simple", price=30000),
         dict(id="latte", lo="ລາເຕ້ (ຮ້ອນ/ເຢັນ)", en="Latte (iced / hot)", vi="Latte (đá/nóng)", kind="simple", price=35000),
         dict(id="orange-juice", lo="ນ້ຳໝາກກ້ຽງສົດ", en="Fresh Orange Juice", vi="Nước cam tươi", kind="simple", price=35000),
         dict(id="avocado-smoothie", lo="ອາໂວກາໂດປັ່ນ", en="Avocado Smoothie", vi="Sinh tố bơ", kind="simple", price=40000),
         dict(id="strawberry-yogurt", lo="ປັ່ນສະຕໍເບີຣີໂຢເກີດ", en="Strawberry Yogurt Smoothie", vi="Sinh tố dâu sữa chua", kind="simple", price=40000),
         dict(id="blueberry-yogurt", lo="ປັ່ນບູເບີຣີໂຢເກີດ", en="Blueberry Yogurt Smoothie", vi="Sinh tố việt quất sữa chua", kind="simple", price=40000),
-        dict(id="matcha-latte", lo="ມັດຊະລາເຕ້", en="Matcha Latte", vi="Matcha Latte", kind="simple", price=40000),
+        dict(id="matcha-latte", lo="ຊາຂຽວລາເຕ້", en="Matcha Latte", vi="Matcha Latte", kind="simple", price=40000),
         dict(id="thai-matcha", lo="ຊາໄທ", en="Thai Matcha", vi="Trà Thái matcha", kind="simple", price=35000),
     ]),
 ]
