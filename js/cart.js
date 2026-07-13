@@ -5,6 +5,7 @@
   var PENDING_ORDER_TTL_MS = 6 * 60 * 60 * 1000; // 6 gio - qua khoang nay coi nhu het han, khong hien lai man hinh xac nhan cu
   var KITCHEN_WHATSAPP_1 = "8562094059629";   // 02094059629
   var KITCHEN_WHATSAPP_2 = "8562099316688";   // 02099316688
+  var KITCHEN_WHATSAPP_3 = "8562098676643";   // 02098676643
 
   function getLang() {
     return document.documentElement.getAttribute("data-lang") || "en";
@@ -394,6 +395,7 @@
     var codeEl = document.getElementById("kitchen-order-code");
     var wa1 = document.getElementById("wa-send-1");
     var wa2 = document.getElementById("wa-send-2");
+    var wa3 = document.getElementById("wa-send-3");
 
     if (tableWrap) tableWrap.hidden = true;
     if (totalRow) totalRow.hidden = true;
@@ -401,6 +403,7 @@
     if (codeEl) codeEl.textContent = order.code;
     if (wa1) wa1.setAttribute("href", order.wa1);
     if (wa2) wa2.setAttribute("href", order.wa2);
+    if (wa3 && order.wa3) wa3.setAttribute("href", order.wa3);
     if (sentMsg) sentMsg.hidden = false;
   }
 
@@ -440,6 +443,7 @@
             table: tableNum,
             wa1: "https://wa.me/" + KITCHEN_WHATSAPP_1 + "?text=" + encodeURIComponent(text),
             wa2: "https://wa.me/" + KITCHEN_WHATSAPP_2 + "?text=" + encodeURIComponent(text),
+            wa3: "https://wa.me/" + KITCHEN_WHATSAPP_3 + "?text=" + encodeURIComponent(text),
             ts: Date.now()
           };
           savePendingOrder(pending);
