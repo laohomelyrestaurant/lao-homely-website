@@ -39,7 +39,7 @@ FIREBASE_CONFIG = {
 }
 SITE_BASE_URL = "https://laohomelyrestaurant.github.io/lao-homely-website/"
 NUM_TABLES = 10
-ASSET_VERSION = "20260714d"  # bump this string whenever css/js changes, to bust browser cache
+ASSET_VERSION = "20260714e"  # bump this string whenever css/js changes, to bust browser cache
 
 NAV = [
     ("index.html", "ໜ້າຫຼັກ", "Home", "Trang chủ"),
@@ -668,7 +668,7 @@ qr_cards = []
 for n in range(1, NUM_TABLES + 1):
     qr_cards.append(f"""      <div class="qr-card">
         <p class="qr-card-eyebrow">{SITE_NAME_LO}</p>
-        <img class="qr-card-img" src="images/qr/ban-{n}.png" alt="QR ໂຕະທີ {n}">
+        <img class="qr-card-img" src="images/qr/ban-{n}.png?v={ASSET_VERSION}" alt="QR ໂຕະທີ {n}">
         <p class="qr-card-table">ໂຕະທີ {n}</p>
         <p class="qr-card-hint">ສະແກນ QR ເພື່ອເບິ່ງເມນູ ແລະ ສັ່ງອາຫານ<br>ກະລຸນາຊຳລະເງິນທີ່ເຄົາເຕີຫຼັງຈາກກິນສຳເລັດ</p>
       </div>""")
