@@ -1,4 +1,5 @@
 /* ===== Lao Homely Restaurant - style.css ===== */
+[hidden]{display:none !important;}
 :root{
   --gold:#c9a227;
   --gold-light:#e7c766;
