@@ -18,6 +18,7 @@ PHONE = "+856 20 9405 9629"
 WHATSAPP_DIGITS = "8562094059629"
 KITCHEN_WHATSAPP_1 = "8562094059629"   # 02094059629
 KITCHEN_WHATSAPP_2 = "8562099316688"   # 02099316688
+KITCHEN_WHATSAPP_3 = "8562098676643"   # 02098676643
 FACEBOOK = "Lao Homely Restaurant"
 TIKTOK = "@laohomelyrestaurant"
 CITY = "Phonxay Village, Pakse District, Champasak Province"
@@ -38,7 +39,7 @@ FIREBASE_CONFIG = {
 }
 SITE_BASE_URL = "https://nguyenvietnga22121976-cuongtv.github.io/lao-homely-website/"
 NUM_TABLES = 10
-ASSET_VERSION = "20260713c"  # bump this string whenever css/js changes, to bust browser cache
+ASSET_VERSION = "20260713d"  # bump this string whenever css/js changes, to bust browser cache
 
 NAV = [
     ("index.html", "ໜ້າຫຼັກ", "Home", "Trang chủ"),
@@ -600,15 +601,16 @@ cart_body = f"""
           <div id="kitchen-sent-msg" class="kitchen-sent-msg" hidden>
             <p>{tri("ບັນທຶກອໍເດີສຳເລັດ! ລະຫັດອໍເດີ:", "Order saved! Order code:", "Đã lưu đơn thành công! Mã đơn:")} <strong id="kitchen-order-code"></strong></p>
             <p class="note">{tri(
-              "ຂັ້ນຕອນສຸດທ້າຍ: ກົດ 2 ປຸ່ມລຸ່ມນີ້ຕາມລຳດັບ ເພື່ອສົ່ງອໍເດີໃຫ້ຫ້ອງຄົວຜ່ານ WhatsApp (ຕ້ອງກົດ 'ສົ່ງ' ໃນແອັບ WhatsApp ອີກເທື່ອໜຶ່ງ)",
-              "Final step: tap the 2 buttons below in order to send the order to the kitchen via WhatsApp (you still need to tap 'Send' inside the WhatsApp app each time)",
-              "Bước cuối: bấm lần lượt 2 nút bên dưới để gửi đơn cho bếp qua WhatsApp (mỗi lần vẫn cần bấm 'Gửi' trong ứng dụng WhatsApp)")}</p>
+              "ຂັ້ນຕອນສຸດທ້າຍ: ກົດ 3 ປຸ່ມລຸ່ມນີ້ຕາມລຳດັບ ເພື່ອສົ່ງອໍເດີໃຫ້ຫ້ອງຄົວຜ່ານ WhatsApp (ຕ້ອງກົດ 'ສົ່ງ' ໃນແອັບ WhatsApp ອີກເທື່ອໜຶ່ງ)",
+              "Final step: tap the 3 buttons below in order to send the order to the kitchen via WhatsApp (you still need to tap 'Send' inside the WhatsApp app each time)",
+              "Bước cuối: bấm lần lượt 3 nút bên dưới để gửi đơn cho bếp qua WhatsApp (mỗi lần vẫn cần bấm 'Gửi' trong ứng dụng WhatsApp)")}</p>
             <a id="wa-send-1" class="btn btn-primary btn-lg" href="#" target="_blank" rel="noopener">{tri("Bước 1: ສົ່ງໃຫ້ຫ້ອງຄົວ (ເບີ 1)", "Step 1: Send to kitchen (Phone 1)", "Bước 1: Gửi cho bếp (SĐT 1)")}</a>
             <a id="wa-send-2" class="btn btn-primary btn-lg" href="#" target="_blank" rel="noopener">{tri("Bước 2: ສົ່ງໃຫ້ຫ້ອງຄົວ (ເບີ 2)", "Step 2: Send to kitchen (Phone 2)", "Bước 2: Gửi cho bếp (SĐT 2)")}</a>
+            <a id="wa-send-3" class="btn btn-primary btn-lg" href="#" target="_blank" rel="noopener">{tri("Bước 3: ສົ່ງໃຫ້ຫ້ອງຄົວ (ເບີ 3)", "Step 3: Send to kitchen (Phone 3)", "Bước 3: Gửi cho bếp (SĐT 3)")}</a>
             <p class="note" style="margin-top:.6rem;">{tri(
-              "ຖ້າ WhatsApp ບໍ່ຂຶ້ນ ຫຼື ບໍ່ໄດ້ກົດສົ່ງ, ສາມາດກັບມາໜ້ານີ້ ແລ້ວກົດ 2 ປຸ່ມຂ້າງເທິງໃໝ່ໄດ້ (ບໍ່ຕ້ອງເລືອກອາຫານຄືນ)",
-              "If WhatsApp didn't open or you didn't tap Send, you can come back to this page and tap the 2 buttons above again (no need to re-select dishes)",
-              "Nếu WhatsApp không mở hoặc chưa bấm Gửi, anh có thể quay lại trang này và bấm lại 2 nút trên bất cứ lúc nào (không cần chọn lại món)")}</p>
+              "ຖ້າ WhatsApp ບໍ່ຂຶ້ນ ຫຼື ບໍ່ໄດ້ກົດສົ່ງ, ສາມາດກັບມາໜ້ານີ້ ແລ້ວກົດ 3 ປຸ່ມຂ້າງເທິງໃໝ່ໄດ້ (ບໍ່ຕ້ອງເລືອກອາຫານຄືນ)",
+              "If WhatsApp didn't open or you didn't tap Send, you can come back to this page and tap the 3 buttons above again (no need to re-select dishes)",
+              "Nếu WhatsApp không mở hoặc chưa bấm Gửi, anh có thể quay lại trang này và bấm lại 3 nút trên bất cứ lúc nào (không cần chọn lại món)")}</p>
             <a id="order-more-link" class="btn btn-outline" href="menu.html">{tri("ສັ່ງເພີ່ມ", "Order more", "Gọi thêm món khác")}</a>
           </div>
         </div>
