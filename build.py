@@ -38,6 +38,7 @@ FIREBASE_CONFIG = {
 }
 SITE_BASE_URL = "https://nguyenvietnga22121976-cuongtv.github.io/lao-homely-website/"
 NUM_TABLES = 10
+ASSET_VERSION = "20260713a"  # bump this string whenever css/js changes, to bust browser cache
 
 NAV = [
     ("index.html", "ໜ້າຫຼັກ", "Home", "Trang chủ"),
@@ -108,8 +109,8 @@ def footer():
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
   <script>window.HOMELY_FIREBASE_CONFIG = {json.dumps(FIREBASE_CONFIG)};</script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>"""
+  <script src="js/cart.js?v={ASSET_VERSION}"></script>
+  <script src="js/main.js?v={ASSET_VERSION}"></script>"""
 
 def page(title_lo, title_en, title_vi, active, body, extra_head=""):
     return f"""<!DOCTYPE html>
@@ -119,7 +120,7 @@ def page(title_lo, title_en, title_vi, active, body, extra_head=""):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title_en} | {SITE_NAME_EN}</title>
 <meta name="description" content="{title_en} - {SITE_NAME_EN}, {CITY}">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v={ASSET_VERSION}">
 {extra_head}
 </head>
 <body>
@@ -623,7 +624,7 @@ bep_html = f"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bang bep - {SITE_NAME_VI}</title>
-<link rel="stylesheet" href="css/bep.css">
+<link rel="stylesheet" href="css/bep.css?v={ASSET_VERSION}">
 </head>
 <body>
   <header class="bep-header">
@@ -646,7 +647,7 @@ bep_html = f"""<!DOCTYPE html>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
   <script>window.HOMELY_FIREBASE_CONFIG = {json.dumps(FIREBASE_CONFIG)};</script>
-  <script src="js/bep.js"></script>
+  <script src="js/bep.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
