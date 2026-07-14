@@ -474,7 +474,7 @@ about_body = f"""
           "(Ghi chú: anh có thể thay đoạn này bằng câu chuyện thành lập quán thật nếu có.)")}</p>
       </div>
       <div class="col-photo">
-        {img_placeholder("ບັນຍາກາດພາຍໃນຮ້ານ", "Interior atmosphere photo", "Ảnh không gian bên trong quán", "-> images/khong-gian-2.jpg")}
+        <img class="storefront-photo" src="images/khong-gian-2.jpg?v={ASSET_VERSION}" alt="{SITE_NAME_EN} interior atmosphere" loading="lazy">
       </div>
     </div>
   </section>
