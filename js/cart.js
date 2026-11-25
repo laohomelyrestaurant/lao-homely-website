@@ -1,9 +1,10 @@
 (function () {
 var CART_KEY = "homely_cart";
 var TABLE_KEY = "homely_table";
-var PENDING_ORDER_KEY = "homely_pending_order";
+var PENDING_ORDER_KEY = "homely_pending_wa_order";
 var PENDING_ORDER_TTL_MS = 6 * 60 * 60 * 1000; // 6 gio - qua khoang nay coi nhu het han, khong hien lai man hinh xac nhan cu
-var KITCHEN_MESSENGER_PAGE_ID = "61591822893556"; // Page ID cua "Lao homely restaurant" tren Facebook - dung de tao link m.me
+// 2 so WhatsApp cua dau bep. Moi don gui toi CA 2 so, dong dau tin nhan ghi so ban.
+var KITCHEN_WHATSAPP = ["8562098676643", "8562094059629"];
 
 function getLang() {
 return document.documentElement.getAttribute("data-lang") || "en";
@@ -100,7 +101,7 @@ function fmtPrice(n) {
 return n.toLocaleString("en-US").replace(/,/g, ".") + " Lak";
 }
 
-/* ---------------- pending Messenger order (survives tab reload/app-switch) ---------------- */
+/* ---------------- pending WhatsApp order (survives tab reload/app-switch) ---------------- */
 function savePendingOrder(order) {
 try { localStorage.setItem(PENDING_ORDER_KEY, JSON.stringify(order)); } catch (e) {}
 }
@@ -287,9 +288,9 @@ return;
 if (noTableMsg) noTableMsg.hidden = true;
 
 /* Neu vua gui don thanh cong o lan truoc (con han) va khach chua chon mon moi,
-khoi phuc lai man hinh xac nhan + nut Messenger thay vi bao "chua chon mon".
+khoi phuc lai man hinh xac nhan + 2 nut WhatsApp thay vi bao "chua chon mon".
 Truong hop nay xay ra khi dien thoai/trinh duyet tai lai trang gio-hang.html
-sau khi khach chuyen qua ung dung Messenger roi quay lai. */
+sau khi khach chuyen qua ung dung WhatsApp roi quay lai. */
 var pending = getPendingOrder();
 if (cart.length === 0 && pending && pending.table === tableNum) {
 showKitchenConfirmation(pending);
@@ -347,7 +348,7 @@ removeLine(parseInt(btn.getAttribute("data-index"), 10));
 });
 }
 
-/* ---------------- kitchen order (send to Firebase + Messenger) ---------------- */
+/* ---------------- kitchen order (send to Firebase + WhatsApp) ---------------- */
 function buildKitchenOrderItems(cart) {
 return cart.map(function (line) {
 var names = lineName(line);
@@ -361,7 +362,7 @@ subtotal: line.unitPrice * line.qty
 
 /* Tin nhan gui cho bep LUON LUON bang tieng Lao (dung nameLo), bat ke khach
 dang xem trang bang ngon ngu nao (Lao/Anh/Viet), vi dau bep la nguoi Lao.
-Noi dung giu nguyen nhu ban WhatsApp truoc day, chi doi kenh gui. */
+Dong dau luon ghi so ban lay tu ma QR. */
 function buildKitchenOrderText(order) {
 var lines = [];
 lines.push("*ອໍເດີໃໝ່ - ໂຕະທີ " + order.table + "*");
@@ -377,10 +378,7 @@ lines.push("(ສົ່ງຈາກລະບົບສັ່ງອາຫານ QR 
 return lines.join("\n");
 }
 
-/* Copy noi dung don vao clipboard (best-effort). Tra ve true/false de UI
-biet co hien thong bao "da sao chep" hay khong. Messenger (m.me) khong ho tro
-truyen san noi dung tin nhan qua URL nhu WhatsApp (wa.me?text=...), nen buoc
-copy nay giup khach chi can dan (paste) vao khung chat roi bam gui. */
+/* Sao chep noi dung don (du phong khi may khach khong mo duoc WhatsApp). */
 function copyOrderText(text) {
 try {
 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -391,9 +389,9 @@ return true;
 return false;
 }
 
-/* Hien thi man hinh xac nhan + noi dung don (de sao chep) + nut mo Messenger.
+/* Hien thi man hinh xac nhan + noi dung don (de sao chep) + nut mo WhatsApp.
 Dung chung cho: (1) ngay sau khi gui don thanh cong, va (2) khoi phuc lai
-khi nguoi dung quay lai trang gio-hang.html sau khi chuyen sang app Messenger
+khi nguoi dung quay lai trang gio-hang.html sau khi chuyen sang app WhatsApp
 (dien thoai/trinh duyet co the tai lai trang, lam mat trang thai trong bo nho). */
 function showKitchenConfirmation(order) {
 var emptyMsg = document.getElementById("cart-empty-msg");
@@ -408,7 +406,6 @@ var tableWrap = document.querySelector(".cart-table-wrap");
 var totalRow = document.querySelector(".cart-total-row");
 var sentMsg = document.getElementById("kitchen-sent-msg");
 var codeEl = document.getElementById("kitchen-order-code");
-var msgBtn = document.getElementById("msg-send-btn");
 var textPreview = document.getElementById("order-text-preview");
 
 if (tableWrap) tableWrap.hidden = true;
@@ -416,21 +413,27 @@ if (totalRow) totalRow.hidden = true;
 if (btn) btn.hidden = true;
 if (codeEl) codeEl.textContent = order.code;
 if (textPreview) textPreview.value = order.text;
-if (msgBtn) {
-msgBtn.setAttribute("href", order.msgLink);
-}
+KITCHEN_WHATSAPP.forEach(function (num, i) {
+var wa = document.getElementById("wa-send-" + (i + 1));
+if (wa) wa.setAttribute("href", "https://wa.me/" + num + "?text=" + encodeURIComponent(order.text));
+markWaButton(wa, !!(order.opened && order.opened[i]));
+});
 if (sentMsg) sentMsg.hidden = false;
 
-/* thu copy san vao clipboard ngay khi hien man hinh xac nhan (best-effort,
-co the bi trinh duyet chan neu khong con trong ngu canh thao tac cua nguoi
-dung - vi vay van giu nut "Sao chep" rieng lam phuong an du phong chac chan). */
-copyOrderText(order.text);
+}
+
+/* Danh dau nut da mo WhatsApp (dau tich) de khach biet con phai bam nut nao. */
+function markWaButton(el, done) {
+if (!el) return;
+el.classList.toggle("btn-primary", !done);
+el.classList.toggle("btn-outline", done);
+var tick = el.querySelector(".wa-tick");
+if (tick) tick.hidden = !done;
 }
 
 function initKitchenOrder() {
 var btn = document.getElementById("send-kitchen-btn");
 var orderMoreLink = document.getElementById("order-more-link");
-var msgBtn = document.getElementById("msg-send-btn");
 var copyBtn = document.getElementById("copy-order-text-btn");
 var copyStatus = document.getElementById("copy-order-status");
 
@@ -439,13 +442,20 @@ orderMoreLink.addEventListener("click", function () {
 clearPendingOrder();
 });
 }
-if (msgBtn) {
-msgBtn.addEventListener("click", function () {
+KITCHEN_WHATSAPP.forEach(function (num, i) {
+var wa = document.getElementById("wa-send-" + (i + 1));
+if (!wa) return;
+wa.addEventListener("click", function () {
 var pending = getPendingOrder();
-if (pending) copyOrderText(pending.text);
-/* khong preventDefault: de trinh duyet tu mo link m.me trong href binh thuong */
-});
+if (pending) {
+pending.opened = pending.opened || {};
+pending.opened[i] = true;
+savePendingOrder(pending);
 }
+markWaButton(wa, true);
+/* khong preventDefault: trinh duyet tu mo link wa.me trong href */
+});
+});
 if (copyBtn) {
 copyBtn.addEventListener("click", function () {
 var pending = getPendingOrder();
@@ -487,7 +497,6 @@ var pending = {
 code: code,
 table: tableNum,
 text: text,
-msgLink: "https://m.me/" + KITCHEN_MESSENGER_PAGE_ID,
 ts: Date.now()
 };
 savePendingOrder(pending);
