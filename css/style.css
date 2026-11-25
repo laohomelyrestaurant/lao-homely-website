@@ -351,3 +351,162 @@ p .lang-lo,p .lang-en,p .lang-vi,
 .kc-wa .kc-btn{background:#128c4a;}.kc-tel .kc-btn{background:#1f4e8c;}
 .kc-btn:hover{color:#fff;opacity:.9;}
 .kc-name span{display:none;}html[data-lang="lo"] .kc-name .lang-lo,html[data-lang="en"] .kc-name .lang-en,html[data-lang="vi"] .kc-name .lang-vi{display:inline;}
+
+/* ===================================================================
+   GIAO DIEN v4: mot tong mau nau - vang - kem, nut khoi noi, dai bang nhau
+   =================================================================== */
+:root{
+  --teal:#7a4a1c;--cream:#f8efdd;--cream-alt:#f0e2c6;--radius:14px;
+  --line:#e0c98f;--paper:#fffaf0;--brown-mid:#6b3f1a;
+  --shadow:0 8px 22px rgba(43,22,7,.12);
+  --btn-h:3.1rem;
+}
+body{background:linear-gradient(180deg,#fbf4e6 0%,#f3e6cc 100%);}
+.alt-bg{background:rgba(224,201,143,.28);}
+.site-header{background:linear-gradient(180deg,#3a1f0c,#4a2a12);border-bottom:3px solid var(--gold);box-shadow:0 4px 14px rgba(43,22,7,.28);}
+.hero,.page-hero{background:radial-gradient(circle at 50% 0,rgba(201,162,39,.28),transparent 65%),linear-gradient(180deg,#4a2a12,#341b0a);border-bottom:3px solid var(--gold);}
+.page-hero{padding:2.2rem 1.2rem;}
+.hero{padding:4rem 1.2rem 4.4rem;}
+.site-footer{background:linear-gradient(180deg,#3a1f0c,#2b1607);border-top:3px solid var(--gold);}
+.section{padding:2.8rem 1.2rem;}
+
+/* --- nut khoi noi dung chung --- */
+.btn,.kc-btn,.nav-toggle,.cart-link,.lang-switch button,#copy-order-text-btn{
+  -webkit-appearance:none;appearance:none;font-family:inherit;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;text-align:center;
+  border-radius:12px;font-weight:700;line-height:1.2;
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;
+}
+.btn,.kc-btn{min-height:var(--btn-h);padding:.55rem 1.1rem;font-size:1rem;border:1px solid transparent;}
+.btn-primary,.kc-wa .kc-btn{
+  color:#3a1f0c;background:linear-gradient(180deg,#f4dc8b 0%,#dcb645 55%,#c9a227 100%);border-color:#b08a1c;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 4px 0 #8f6d12,0 8px 14px rgba(43,22,7,.22);
+}
+.kc-tel .kc-btn{
+  color:#fff3d6;background:linear-gradient(180deg,#8a5426 0%,#6b3f1a 55%,#56300f 100%);border-color:#4a2a12;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 4px 0 #361c08,0 8px 14px rgba(43,22,7,.25);
+}
+.btn-outline,#copy-order-text-btn,#kitchen-sent-msg .btn-outline{
+  color:#4a2a12;background:linear-gradient(180deg,#fffdf8,#f3e4c2);border:1px solid #c9a227;
+  box-shadow:inset 0 1px 0 #fff,0 4px 0 #cdb06a,0 8px 14px rgba(43,22,7,.14);
+}
+.btn:hover,.kc-btn:hover{filter:brightness(1.05);transform:translateY(-1px);opacity:1;}
+.kc-wa .kc-btn:hover{color:#3a1f0c;}
+.btn:active,.kc-btn:active{transform:translateY(4px);box-shadow:inset 0 2px 5px rgba(43,22,7,.3);}
+.btn:focus-visible,.kc-btn:focus-visible,.cart-link:focus-visible,.lang-switch button:focus-visible,.nav-toggle:focus-visible{outline:3px solid #8c2f1b;outline-offset:2px;}
+.btn:disabled{opacity:.6;cursor:wait;}
+
+/* nut cung nhom dai bang nhau */
+.hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:580px;margin:0 auto;}
+.section .center>.btn,.empty-cart-msg .btn,.no-table-warning .btn,.map-link,.map-link .btn{width:100%;max-width:340px;}
+#kitchen-order-panel{max-width:640px;margin-left:auto;margin-right:auto;padding:1.5rem;}
+#send-kitchen-btn,#kitchen-sent-msg .btn,#copy-order-text-btn{display:flex;width:100%;min-height:var(--btn-h);font-size:1rem;margin:.9rem 0 0!important;}
+#send-kitchen-btn{min-height:3.6rem;font-size:1.15rem;}
+
+/* --- thanh tac vu tren cung --- */
+.header-inner{padding:.6rem 1rem;gap:.6rem 1.4rem;}
+.header-actions{gap:.5rem;}
+.lang-switch{gap:.5rem;}
+.cart-link,.lang-switch button,.nav-toggle{
+  height:2.5rem;min-width:3.6rem;padding:0 .6rem;font-size:.82rem;letter-spacing:.02em;
+  color:#f3e4c2;border:1px solid #a8781a;border-radius:10px;background:linear-gradient(180deg,#6b3f1a,#4a2a12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 3px 0 #1f0f04;
+}
+.nav-toggle{display:none;}
+.cart-icon{font-family:inherit;font-size:.82rem;}
+.lang-switch button.active,.cart-link.active,.cart-link:hover,.lang-switch button:hover{
+  color:#3a1f0c;background:linear-gradient(180deg,#f4dc8b,#c9a227);border-color:#f4dc8b;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 3px 0 #8f6d12;
+}
+.cart-badge{top:-7px;right:-6px;}
+
+/* --- the, khung --- */
+.card,.menu-list,.cart-table,.kc{background:var(--paper);}
+.card{border:1px solid var(--line);border-top:3px solid var(--gold);padding:.9rem .9rem 1.2rem;}
+.card .price,.menu-item-price{color:#8c2f1b;}
+.storefront-photo,.map-embed-wrap,.menu-item-photo{border:1px solid var(--line);}
+.storefront-photo{max-height:560px;object-fit:cover;}
+.section-title{font-size:1.55rem;}
+.menu-section-title{background:linear-gradient(180deg,#6b3f1a,#4a2a12);font-size:1.2rem;border-radius:14px 14px 0 0;margin:0;padding:.75rem 1.1rem;}
+.menu-list{border-color:var(--line);border-radius:0 0 14px 14px;box-shadow:var(--shadow);}
+.menu-section{max-width:1000px;margin-left:auto;margin-right:auto;}
+.menu-item{padding:1.4rem;gap:1.6rem;grid-template-columns:minmax(0,5fr) minmax(0,6fr);}
+.menu-item:nth-child(even){background:#fbf2df;}
+.menu-item.selected,.menu-item:has(.select-checkbox:checked){background:#f6e6bd;box-shadow:inset 0 0 0 2px var(--gold);}
+.dish-lo{font-size:1.25rem;}
+.dish-en,.dish-vi{font-size:1rem;}
+.dish-en{color:#7a4a1c;}
+.dish-vi{color:#5a4632;}
+
+/* thanh chon mon: hai khoi dai bang nhau */
+.cart-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.7rem;border-top-color:var(--line);padding-top:.8rem;}
+.variant-select{grid-column:1/-1;max-width:none;width:100%;min-height:2.9rem;font-size:.95rem;border-color:var(--line);border-radius:12px;padding:0 .7rem;background:#fff;color:var(--ink);}
+.select-check{position:relative;justify-content:center;min-height:2.9rem;border-radius:12px;padding:.3rem .5rem;border:1px solid #c9a227;color:#4a2a12;background:linear-gradient(180deg,#fffdf8,#f3e4c2);box-shadow:inset 0 1px 0 #fff,0 3px 0 #cdb06a,0 6px 10px rgba(43,22,7,.12);}
+.select-check:active{transform:translateY(3px);box-shadow:inset 0 2px 4px rgba(43,22,7,.25);}
+.select-check:has(:checked){background:linear-gradient(180deg,#f4dc8b,#c9a227);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 3px 0 #8f6d12;}
+.select-check-box{width:1.4rem;height:1.4rem;}
+.select-check-label{white-space:normal;line-height:1.2;}
+.select-checkbox:checked ~ .select-check-box{background:#6b3f1a;border-color:#6b3f1a;}
+.qty-stepper{display:grid;grid-template-columns:1fr 1.2fr 1fr;min-height:2.9rem;border-radius:12px;border-color:#c9a227;background:#fff;box-shadow:0 3px 0 #cdb06a,0 6px 10px rgba(43,22,7,.12);align-items:stretch;}
+.qty-btn,.qty-input{width:100%;height:auto;font-size:1.1rem;min-width:0;}
+.qty-btn{background:linear-gradient(180deg,#fbf2df,#ecd9ac);}
+.qty-input{border-color:var(--line);background:#fff;color:var(--ink);font-weight:700;}
+
+/* --- gio hang --- */
+.table-banner{justify-content:center;background:linear-gradient(180deg,#f4dc8b,#dcb645);color:#3a1f0c;border:1px solid #b08a1c;border-radius:12px;padding:.7rem 1rem;font-size:1.1rem;}
+.page-hero .table-banner{max-width:340px;margin:1rem auto 0;}
+.page-hero .no-table-warning{max-width:560px;margin:1rem auto 0;}
+.no-table-warning{background:#fbeecb;color:#6b3f1a;border:1px solid #c9a227;}
+#table-order-banner,.cart-table-wrap,.cart-total-row{max-width:860px;margin-left:auto;margin-right:auto;}
+#table-order-banner{max-width:640px;}
+.cart-table{border-color:var(--line);border-radius:14px;box-shadow:var(--shadow);}
+.cart-table th{background:#4a2a12;}
+.cart-table .cart-qty-input{border:1px solid var(--line);border-radius:8px;min-height:2.3rem;background:#fff;color:var(--ink);}
+.cart-table td p{margin:0 0 .15rem;}
+.cart-total-row{font-size:1.3rem;margin-bottom:1.4rem;}
+.kitchen-order-panel{background:var(--paper);border:1px solid var(--line);}
+.kitchen-sent-msg{background:#fbf2df;border:1px solid var(--line);color:var(--ink);padding:1.1rem;}
+.kitchen-sent-msg .note{color:var(--brown-mid);opacity:1;}
+.kitchen-live .ks{background:#f6e6bd;color:#4a2a12;border-radius:12px;text-align:center;margin:.6rem 0;}
+.kitchen-live .ks-ok{background:#e3e6bf;color:#3d4a12;}
+.kitchen-live .ks-late{background:#f7d9b8;color:#7a2a12;}
+#order-text-preview{border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);}
+#copy-order-status{color:#4d5a14!important;}
+
+/* --- khung goi / nhan bep --- */
+.kc{margin:.9rem 0;padding:.9rem;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);}
+.kc-name{text-align:center;font-size:1.05rem;color:#4a2a12;margin:0 0 .3rem;padding-bottom:.5rem;border-bottom:1px dashed var(--line);}
+.kc-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem .7rem;margin-top:.6rem;padding-bottom:.35rem;}
+.kc-lab{color:var(--brown-mid);font-size:.85rem;}
+.kc-btn{padding:.4rem .3rem;font-size:.95rem;min-width:0;gap:.3rem;}
+
+@media (max-width:900px){
+  .menu-item{grid-template-columns:1fr;padding:1.1rem;gap:.9rem;}
+}
+@media (max-width:680px){
+  .section{padding:2rem 1rem;}
+  .hero{padding:2.6rem 1rem 3rem;}
+  .hero h1{font-size:1.9rem;}
+  .page-hero{padding:1.5rem 1rem;}
+  .page-hero h1{font-size:1.6rem;}
+  .header-inner{padding:.5rem .9rem .65rem;}
+  .brand{flex:1 1 100%;min-width:0;}
+  .header-actions{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem;}
+  .lang-switch{display:contents;}
+  .cart-link,.lang-switch button,.nav-toggle{display:inline-flex;min-width:0;width:100%;padding:0;}
+  .hero-actions{gap:.7rem;}
+  .hero-actions .btn{padding:.5rem .3rem;font-size:.9rem;}
+  #kitchen-order-panel{padding:1rem;}
+  .kitchen-sent-msg{padding:.8rem;}
+  .kc{padding:.7rem;}
+  .grid-3{gap:1.2rem;margin:1.2rem 0;}
+  .section .center>.btn,.empty-cart-msg .btn,.no-table-warning .btn,.map-link,.map-link .btn{max-width:none;}
+  .cart-table,.cart-table tbody{display:block;}
+  .cart-table thead{display:none;}
+  .cart-table tr{display:grid;grid-template-columns:1fr auto auto auto;gap:.3rem .7rem;align-items:center;padding:.9rem;border-bottom:1px solid var(--line);}
+  .cart-table td{padding:0;border:0;}
+  .cart-table td:first-child{grid-column:1/-1;}
+  .cart-table td:nth-child(4){font-weight:700;color:#8c2f1b;}
+  .cart-table .dish-lo{font-size:1.1rem;}
+  .cart-total-row{justify-content:space-between;}
+}
+@media (max-width:680px){.grid-4{grid-template-columns:repeat(2,minmax(0,1fr));}.ph-label,.ph-hint{max-width:100%;overflow-wrap:anywhere;}}
