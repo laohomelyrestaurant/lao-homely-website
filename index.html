@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home | Lao Homely Restaurant</title>
 <meta name="description" content="Home - Lao Homely Restaurant, Phonxay Village, Pakse District, Champasak Province">
-<link rel="stylesheet" href="css/style.css?v=20260714f">
+<link rel="stylesheet" href="css/style.css?v=20261125b">
 
 </head>
 <body>
@@ -68,33 +68,21 @@
   <section class="section highlights alt-bg">
     <div class="section-inner">
       <h2 class="section-title center"><span class="lang-lo">ມື້ນີ້ຮ້ານແນະນຳ</span><span class="lang-en">Today's Specials</span><span class="lang-vi">Đặc sản hôm nay</span></h2>
-      <div class="grid-3">
+      <div class="grid-3" id="specials-grid">
         <div class="card">
-          <div class="img-placeholder ph-square">
-      <span class="ph-icon">IMG</span>
-      <span class="ph-label"><span class="lang-lo">ບົ້ວນຶ່ງ ໄຂ່ດາວ ຂະໜົມປັງ</span><span class="lang-en">Grilled Beef, Fried Eggs and Baguette Set</span><span class="lang-vi">Set bò nướng, trứng ốp la và bánh mì</span></span>
-      <span class="ph-hint">-> images/set-bo-nuong.jpg</span>
-    </div>
+          <img class="sp-photo" src="images/dishes/beef-steak.jpg" alt="" loading="lazy">
           <h3><span class="lang-lo">ຊຸດອາຫານເຊົ້າໂຮມລີ້</span><span class="lang-en">Homely Breakfast Set</span><span class="lang-vi">Set ăn sáng Homely</span></h3>
           <p><span class="lang-lo">ບົ້ວນຶ່ງ, ໄຂ່ດາວ 5 ໜ່ວຍ, ຂະໜົມປັງຝຣັ່ງ 2 ອັນ</span><span class="lang-en">Grilled beef, 5 fried eggs, 2 baguette loaves</span><span class="lang-vi">Bò nướng, 5 trứng ốp la, 2 ổ bánh mì baguette</span></p>
           <p class="price"><span class="lang-lo">ລາຄາ: ຕິດຕໍ່ຮ້ານ</span><span class="lang-en">Price: contact restaurant</span><span class="lang-vi">Giá: liên hệ nhà hàng</span> <span class="verify">(<span class="lang-lo">ຕ້ອງກວດຄືນ</span><span class="lang-en">to be confirmed</span><span class="lang-vi">cần xác minh lại</span>)</span></p>
         </div>
         <div class="card">
-          <div class="img-placeholder ph-square">
-      <span class="ph-icon">IMG</span>
-      <span class="ph-label"><span class="lang-lo">ຢຳສະຫຼັດລາວ</span><span class="lang-en">Lao Salad</span><span class="lang-vi">Gỏi Lào</span></span>
-      <span class="ph-hint">-> images/goi-lao.jpg</span>
-    </div>
+          <img class="sp-photo" src="images/dishes/lao-salad.jpg" alt="" loading="lazy">
           <h3><span class="lang-lo">ຢຳສະຫຼັດລາວ</span><span class="lang-en">Lao Salad</span><span class="lang-vi">Gỏi Lào</span></h3>
           <p><span class="lang-lo">ອາຫານປະເພດສະຫຼັດແທ້ໆແບບລາວ</span><span class="lang-en">Authentic Lao-style salad</span><span class="lang-vi">Món gỏi chuẩn vị Lào</span></p>
           <p class="price">75,000 Lak</p>
         </div>
         <div class="card">
-          <div class="img-placeholder ph-square">
-      <span class="ph-icon">IMG</span>
-      <span class="ph-label"><span class="lang-lo">ຕົ້ມໄກ່ລາວ</span><span class="lang-en">Lao Chicken Soup</span><span class="lang-vi">Súp gà kiểu Lào</span></span>
-      <span class="ph-hint">-> images/sup-ga-lao.jpg</span>
-    </div>
+          <img class="sp-photo" src="images/dishes/lao-style-soup.jpg" style="object-position:bottom" alt="" loading="lazy">
           <h3><span class="lang-lo">ຕົ້ມໄກ່ລາວ</span><span class="lang-en">Lao Chicken Soup</span><span class="lang-vi">Súp gà kiểu Lào</span></h3>
           <p><span class="lang-lo">ອາຫານລາວແທ້ໆ ອົບອຸ່ນຫົວໃຈ</span><span class="lang-en">Authentic comfort food from Laos</span><span class="lang-vi">Món ăn Lào ấm lòng</span></p>
           <p class="price">250,000 Lak</p>
@@ -156,7 +144,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
   <script>window.HOMELY_FIREBASE_CONFIG = {"apiKey": "AIzaSyBNP5hFGXQgzSRzK5u-qhQEQXC5u6DoFBw", "authDomain": "lao-homely-orders.firebaseapp.com", "databaseURL": "https://lao-homely-orders-default-rtdb.firebaseio.com", "projectId": "lao-homely-orders", "storageBucket": "lao-homely-orders.firebasestorage.app", "messagingSenderId": "468038291835", "appId": "1:468038291835:web:5c70d162882a3a05a8edde"};</script>
-  <script src="js/cart.js?v=20261125a"></script>
+  <script src="js/cart.js?v=20261125b"></script>
   <script src="js/main.js?v=20260714f"></script>
+  <script src="js/dac-san.js?v=20261125b"></script>
 </body>
 </html>

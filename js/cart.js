@@ -419,14 +419,34 @@ if (wa) wa.setAttribute("href", "https://wa.me/" + num + "?text=" + encodeURICom
 markWaButton(wa, !!(order.opened && order.opened[i]));
 });
 if (sentMsg) sentMsg.hidden = false;
+watchKitchen(order);
 
+}
+
+/* Theo doi phan hoi cua bang bep (bep.html): da hien tren man hinh / bep da nhan.
+Sau 45 giay chua thay gi thi nhac khach bao nhan vien. */
+var watchRef = null, watchTimer = null;
+function watchKitchen(order) {
+var box = document.getElementById("kitchen-live");
+if (!box || !order.key || typeof firebase === "undefined" || !firebase.apps || !firebase.apps.length) return;
+if (watchRef) watchRef.off();
+clearTimeout(watchTimer);
+box.setAttribute("data-state", "wait");
+watchTimer = setTimeout(function () {
+if (box.getAttribute("data-state") === "wait") box.setAttribute("data-state", "late");
+}, 45000);
+watchRef = firebase.database().ref("orders/" + order.key);
+watchRef.on("value", function (snap) {
+var o = snap.val();
+if (!o) return;
+if (o.status === "nhan" || o.status === "xong") box.setAttribute("data-state", "ok");
+else if (o.seenAt) box.setAttribute("data-state", "seen");
+});
 }
 
 /* Danh dau nut da mo WhatsApp (dau tich) de khach biet con phai bam nut nao. */
 function markWaButton(el, done) {
 if (!el) return;
-el.classList.toggle("btn-primary", !done);
-el.classList.toggle("btn-outline", done);
 var tick = el.querySelector(".wa-tick");
 if (tick) tick.hidden = !done;
 }
@@ -495,6 +515,7 @@ var code = "B" + tableNum + "-" + ref.key.slice(-4).toUpperCase();
 var text = buildKitchenOrderText({ table: tableNum, code: code, items: items, total: total });
 var pending = {
 code: code,
+key: ref.key,
 table: tableNum,
 text: text,
 ts: Date.now()

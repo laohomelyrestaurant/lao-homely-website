@@ -334,3 +334,12 @@ p .lang-lo,p .lang-en,p .lang-vi,
   .bank-info-box{grid-template-columns:1fr;}
   .header-actions{gap:.5rem;}
 }
+
+/* ---------- trang thai bep + dac san ---------- */
+.kitchen-live .ks{display:none;font-size:1.1rem;font-weight:700;padding:.7rem;border-radius:8px;background:#fff8e1;}
+.kitchen-live[data-state="wait"] .ks-wait,.kitchen-live[data-state="seen"] .ks-seen,.kitchen-live[data-state="ok"] .ks-ok,.kitchen-live[data-state="late"] .ks-late{display:block;}
+.kitchen-live .ks-ok{background:#c8e6c9;}.kitchen-live .ks-late{background:#ffe0b2;}
+.sp-photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:var(--radius);display:block;margin-bottom:.6rem;}
+.sp-photo[hidden]{display:none;}
+.sp-add{display:flex;align-items:center;justify-content:center;min-height:180px;border:3px dashed var(--gold);border-radius:var(--radius);font-size:1.3rem;font-weight:700;text-align:center;}
+#kitchen-sent-msg .btn-outline{color:#5a3a00;border-color:#a8781a;}

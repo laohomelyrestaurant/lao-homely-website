@@ -11,6 +11,26 @@
     return (n || 0).toLocaleString("en-US").replace(/,/g, ".") + " Lak";
   }
 
+  function esc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; });
+  }
+
+  /* chuong: keu 3 giay/lan khi con don moi chua bam Nhan don */
+  var audio = null, ringing = false, MAX_AGE = 24 * 3600e3;
+  function beep() {
+    if (!audio || !ringing) return;
+    [0, 0.25, 0.5].forEach(function (t) {
+      var o = audio.createOscillator(), g = audio.createGain();
+      o.frequency.value = 988; g.gain.value = 0.5; o.connect(g); g.connect(audio.destination);
+      o.start(audio.currentTime + t); o.stop(audio.currentTime + t + 0.18);
+    });
+  }
+  setInterval(beep, 3000);
+
+  function keepAwake() {
+    if (navigator.wakeLock && document.visibilityState === "visible") navigator.wakeLock.request("screen").catch(function () {});
+  }
+
   function pad2(n) {
     return (n < 10 ? "0" : "") + n;
   }
@@ -28,20 +48,21 @@
     var card = document.createElement("div");
     card.className = "bep-card" + (order.status === "xong" ? " bep-card-done" : "");
     var itemsHtml = (order.items || []).map(function (it) {
-      var name = it.nameVi || it.nameEn || it.nameLo || "";
-      return '<li><span class="bep-item-qty">x' + it.qty + '</span> <span class="bep-item-name">' + name + '</span></li>';
+      var name = esc(it.nameLo || it.nameEn || it.nameVi) + (it.nameVi ? "<br><small>" + esc(it.nameVi) + "</small>" : "");
+      return '<li><span class="bep-item-qty">x' + esc(it.qty) + '</span> <span class="bep-item-name">' + name + '</span></li>';
     }).join("");
     card.innerHTML =
       '<div class="bep-card-head">' +
-        '<span class="bep-card-table">BAN ' + order.table + '</span>' +
+        '<span class="bep-card-table">ໂຕະ / BÀN ' + esc(order.table) + '</span>' +
         '<span class="bep-card-time">' + fmtTime(order.createdAt) + '</span>' +
       '</div>' +
-      '<div class="bep-card-code">Ma: ' + orderCode(key, order.table) + '</div>' +
+      '<div class="bep-card-code">Ma: ' + esc(orderCode(key, order.table)) + '</div>' +
       '<ul class="bep-card-items">' + itemsHtml + '</ul>' +
       '<div class="bep-card-total">Tong: ' + fmtPrice(order.total) + '</div>' +
       (order.status === "xong"
         ? '<div class="bep-card-done-label">Da xong</div>'
-        : '<button type="button" class="bep-done-btn" data-key="' + key + '">Da xong</button>');
+        : (order.status === "nhan" ? "" : '<button type="button" class="bep-done-btn bep-take-btn" data-act="nhan" data-key="' + esc(key) + '">ຮັບອໍເດີ / Nhận đơn</button>') +
+          '<button type="button" class="bep-done-btn" data-act="xong" data-key="' + esc(key) + '">ສຳເລັດ / Đã xong</button>');
     return card;
   }
 
@@ -50,7 +71,8 @@
       btn.addEventListener("click", function () {
         var key = btn.getAttribute("data-key");
         btn.disabled = true;
-        ordersRef.child(key).update({ status: "xong", doneAt: Date.now() });
+        var act = btn.getAttribute("data-act");
+        ordersRef.child(key).update(act === "nhan" ? { status: "nhan", acceptedAt: Date.now() } : { status: "xong", doneAt: Date.now() });
       });
     });
   }
@@ -63,6 +85,25 @@
       return;
     }
     var ordersRef = firebase.database().ref("orders");
+    var latest = [];
+    /* chi bao "da hien tren man hinh bep" khi bep da bat chuong va dang mo trang */
+    function markSeen() {
+      if (!audio || document.visibilityState !== "visible") return;
+      latest.forEach(function (p) {
+        if (!p[1].seenAt && p[1].status === "moi") { p[1].seenAt = Date.now(); ordersRef.child(p[0]).update({ seenAt: p[1].seenAt }); }
+      });
+    }
+    var start = document.getElementById("bep-start");
+    if (start) start.addEventListener("click", function () {
+      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+      audio.resume();
+      start.textContent = "🔔 ເປີດສຽງແລ້ວ / Chuông đang bật";
+      keepAwake(); markSeen();
+      var r = ringing; ringing = true; beep(); ringing = r;
+    });
+    document.addEventListener("visibilitychange", function () {
+      if (audio && document.visibilityState === "visible") { audio.resume(); keepAwake(); markSeen(); }
+    });
 
     var pendingList = document.getElementById("bep-pending-list");
     var doneList = document.getElementById("bep-done-list");
@@ -78,11 +119,16 @@
       Object.keys(val).forEach(function (key) {
         var order = val[key];
         if (order.status === "xong") done.push([key, order]);
-        else pending.push([key, order]);
+        else if ((order.createdAt || 0) > Date.now() - MAX_AGE) pending.push([key, order]); // don cu hon 24 gio: an, khong xoa
       });
       pending.sort(function (a, b) { return (a[1].createdAt || 0) - (b[1].createdAt || 0); });
       done.sort(function (a, b) { return (b[1].doneAt || b[1].createdAt || 0) - (a[1].doneAt || a[1].createdAt || 0); });
 
+      ringing = pending.some(function (p) { return p[1].status === "moi"; });
+      document.title = (ringing ? "(!) " : "") + "Bang bep";
+      latest = pending;
+      markSeen();
+      beep();
       pendingList.innerHTML = "";
       pending.forEach(function (pair) {
         pendingList.appendChild(renderOrderCard(pair[0], pair[1]));
