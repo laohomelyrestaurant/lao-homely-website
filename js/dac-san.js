@@ -28,16 +28,30 @@
       .sort(function (a, b) { return (a.it.at || 0) - (b.it.at || 0); });
   }
 
-  /* trang chu: co mon cua hom nay thi thay, khong co thi giu mon mac dinh */
+  var SLOTS = 4; // so o mon dac biet moi ngay
+  var EMPTY = [["ລໍຖ້າເມນູພິເສດ", "Chef's surprise, coming soon", "Món mới sắp có"]];
+  var CLOCHE = '<svg viewBox="0 0 64 64" width="72" height="72" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="15" r="3"/><path d="M10 42a22 22 0 0 1 44 0z"/><path d="M5 47h54"/><path d="M12 52h40"/><path d="M18 37a14 14 0 0 1 9-9"/></svg>';
+
+  function slot(admin) {
+    var c = el(admin ? "a" : "div", "sp-empty" + (admin ? " sp-live" : ""));
+    var ic = el("div", "sp-ic"); ic.innerHTML = CLOCHE; c.appendChild(ic);
+    if (admin) { c.href = "dac-san.html"; c.appendChild(el("b", "", "+ Thêm món")); return c; }
+    var t = el("p"), w = EMPTY[0];
+    t.appendChild(el("span", "lang-lo", w[0])); t.appendChild(el("span", "lang-en", w[1])); t.appendChild(el("span", "lang-vi", w[2]));
+    c.appendChild(t);
+    return c;
+  }
+
+  /* trang chu: luon du 4 o; o chua co mon hien hinh nap dia. May da mo dac-san.html thay nut them mon */
   function home() {
-    var grid = document.getElementById("specials-grid"), d = db();
+    var grid = document.getElementById("specials-grid"), d = db(), admin = false;
     if (!grid) return;
-    var old = Array.prototype.slice.call(grid.children), admin = false;
     try { admin = localStorage.getItem(ADMIN_KEY) === "1"; } catch (e) {}
     function draw(rows) {
       grid.innerHTML = "";
-      (rows.length ? rows.map(function (r) { return card(r.it); }) : old).forEach(function (n) { grid.appendChild(n); });
-      if (admin) { var a = el("a", "sp-add", "+ Thêm món"); a.href = "dac-san.html"; grid.appendChild(a); }
+      rows = rows.slice(0, SLOTS);
+      rows.forEach(function (r) { grid.appendChild(card(r.it)); });
+      for (var i = rows.length; i < SLOTS; i++) grid.appendChild(slot(admin));
     }
     draw([]);
     if (d) d.ref("specials/" + today()).on("value", function (s) { draw(list(s.val())); }, function () {});
@@ -60,7 +74,8 @@
     if (!form) return;
     try { localStorage.setItem(ADMIN_KEY, "1"); } catch (e) {}
     var day = document.getElementById("sp-day"), msg = document.getElementById("sp-msg"), out = document.getElementById("sp-list");
-    var prev = document.getElementById("sp-prev"), photo = null, ref = null;
+    var prev = document.getElementById("sp-prev"), photo = null, ref = null, count = 0;
+    var add = form.querySelector("button[type=submit]");
     function say(t) { msg.textContent = t; }
     if (!d) { say("Không kết nối được, kiểm tra mạng."); return; }
     day.value = today();
@@ -72,7 +87,9 @@
       ref.on("value", function (s) {
         out.innerHTML = "";
         var rows = list(s.val());
-        if (!rows.length) out.appendChild(el("p", "", "Ngày này chưa có món, trang chủ hiện món mặc định."));
+        count = rows.length; add.disabled = count >= SLOTS;
+        document.getElementById("sp-count").textContent = count + "/" + SLOTS + (count >= SLOTS ? " - đã đủ, xóa bớt để thêm món khác" : "");
+        if (!rows.length) out.appendChild(el("p", "", "Ngày này chưa có món, 4 ô ở trang chủ để trống."));
         rows.forEach(function (r) {
           var c = card(r.it), b = el("button", "btn btn-outline btn-sm", "Xóa món này");
           b.type = "button";
@@ -91,6 +108,7 @@
       e.preventDefault();
       var v = function (id) { return document.getElementById(id).value.trim(); };
       var it = { lo: v("sp-lo"), en: v("sp-en"), vi: v("sp-vi"), price: v("sp-price"), at: Date.now() };
+      if (count >= SLOTS) { say("Ngày này đã đủ " + SLOTS + " món."); return; }
       if (!it.lo && !it.en && !it.vi) { say("Nhập ít nhất một tên món."); return; }
       if (!photo) { say("Chọn ảnh món."); return; }
       it.photo = photo; say("Đang lưu...");
