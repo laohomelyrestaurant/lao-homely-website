@@ -343,3 +343,11 @@ p .lang-lo,p .lang-en,p .lang-vi,
 .sp-photo[hidden]{display:none;}
 .sp-add{display:flex;align-items:center;justify-content:center;min-height:180px;border:3px dashed var(--gold);border-radius:var(--radius);font-size:1.3rem;font-weight:700;text-align:center;}
 #kitchen-sent-msg .btn-outline{color:#5a3a00;border-color:#a8781a;}
+.kc{margin:.8rem -.7rem;padding:.6rem;border:1px solid var(--gold);border-radius:8px;background:#fff;}
+.kc-name{font-weight:700;margin:0 0 .4rem;}
+.kc-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:.4rem;align-items:center;margin-top:.4rem;}
+.kc-lab{grid-column:1/-1;font-size:.82rem;font-weight:700;color:#444;}
+.kc-btn{display:block;text-align:center;padding:.65rem .2rem;border-radius:8px;font-size:.88rem;font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;}
+.kc-wa .kc-btn{background:#128c4a;}.kc-tel .kc-btn{background:#1f4e8c;}
+.kc-btn:hover{color:#fff;opacity:.9;}
+.kc-name span{display:none;}html[data-lang="lo"] .kc-name .lang-lo,html[data-lang="en"] .kc-name .lang-en,html[data-lang="vi"] .kc-name .lang-vi{display:inline;}

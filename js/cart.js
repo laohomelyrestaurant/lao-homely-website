@@ -416,6 +416,8 @@ if (textPreview) textPreview.value = order.text;
 KITCHEN_WHATSAPP.forEach(function (num, i) {
 var wa = document.getElementById("wa-send-" + (i + 1));
 if (wa) wa.setAttribute("href", "https://wa.me/" + num + "?text=" + encodeURIComponent(order.text));
+var sms = document.getElementById("sms-send-" + (i + 1));
+if (sms) sms.setAttribute("href", "sms:+" + num + "?&body=" + encodeURIComponent(order.text));
 markWaButton(wa, !!(order.opened && order.opened[i]));
 });
 if (sentMsg) sentMsg.hidden = false;
