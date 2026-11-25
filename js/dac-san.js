@@ -18,7 +18,7 @@
   function card(it) {
     var c = el("div", "card");
     if (okImg(it.photo)) { var im = el("img", "sp-photo"); im.src = it.photo; im.alt = ""; c.appendChild(im); }
-    c.appendChild(names(it));
+    if (it.lo || it.en || it.vi) c.appendChild(names(it));
     if (it.price) c.appendChild(el("p", "price", it.price));
     return c;
   }
@@ -54,19 +54,58 @@
       for (var i = rows.length; i < SLOTS; i++) grid.appendChild(slot(admin));
     }
     draw([]);
+    var title = document.querySelector("#today-specials h2"), taps = 0, last = 0;
+    if (title) title.addEventListener("click", function () {
+      var now = Date.now(); taps = now - last < 1500 ? taps + 1 : 1; last = now;
+      if (taps >= 5) location.href = "dac-san.html";
+    });
     if (d) d.ref("specials/" + today()).on("value", function (s) { draw(list(s.val())); }, function () {});
   }
 
-  function shrink(file, cb) {
-    var url = URL.createObjectURL(file), im = new Image();
-    im.onload = function () {
-      var k = Math.min(1, 900 / Math.max(im.width, im.height)), cv = document.createElement("canvas");
-      cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
-      cv.getContext("2d").drawImage(im, 0, 0, cv.width, cv.height);
-      URL.revokeObjectURL(url); cb(cv.toDataURL("image/jpeg", 0.75));
-    };
-    im.onerror = function () { cb(null); };
+  /* ve ra JPEG nho, giam dan den khi duoi ~450 KB */
+  function draw2(im) {
+    var w = im.naturalWidth, h = im.naturalHeight, side = 1000, q = 0.78, u = "";
+    if (!w || !h) return null;
+    for (var i = 0; i < 5; i++) {
+      var k = Math.min(1, side / Math.max(w, h)), cv = document.createElement("canvas");
+      cv.width = Math.max(1, Math.round(w * k)); cv.height = Math.max(1, Math.round(h * k));
+      var g = cv.getContext("2d");
+      g.fillStyle = "#fff"; g.fillRect(0, 0, cv.width, cv.height);
+      g.drawImage(im, 0, 0, cv.width, cv.height);
+      u = cv.toDataURL("image/jpeg", q);
+      if (u.length < 600000) break;
+      side *= 0.8; q -= 0.06;
+    }
+    return okImg(u) ? u : null;
+  }
+  function load(blob, ok, fail) {
+    var url = URL.createObjectURL(blob), im = new Image();
+    im.onload = function () { var u = null; try { u = draw2(im); } catch (e) {} URL.revokeObjectURL(url); u ? ok(u) : fail(); };
+    im.onerror = function () { URL.revokeObjectURL(url); fail(); };
     im.src = url;
+  }
+  /* anh HEIC cua iPhone mo tren may tinh: tai bo chuyen doi khi can */
+  function heic(file, ok, fail) {
+    function go() { window.heic2any({ blob: file, toType: "image/jpeg", quality: 0.85 }).then(function (r) { load(Array.isArray(r) ? r[0] : r, ok, fail); }, fail); }
+    if (window.heic2any) return go();
+    var sc = document.createElement("script");
+    sc.src = "https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"; sc.onload = go; sc.onerror = fail;
+    document.head.appendChild(sc);
+  }
+  function shrink(file, cb) {
+    load(file, cb, function () {
+      if (/hei[cf]/i.test(file.type + " " + file.name)) heic(file, cb, function () { cb(null); });
+      else cb(null);
+    });
+  }
+
+  /* ghi bang HTTPS (khong qua websocket): han 25 giay, thu lai toi da 3 lan, cung khoa nen khong bi trung */
+  function save(path, data, tries) {
+    var ac = window.AbortController ? new AbortController() : null;
+    var t = setTimeout(function () { if (ac) ac.abort(); }, 25000);
+    return fetch(window.HOMELY_FIREBASE_CONFIG.databaseURL + "/" + path + ".json", { method: "PUT", body: JSON.stringify(data), signal: ac ? ac.signal : undefined })
+      .then(function (r) { clearTimeout(t); if (!r.ok) throw new Error("máy chủ trả lỗi " + r.status); })
+      .catch(function (e) { clearTimeout(t); if (tries > 1) return save(path, data, tries - 1); throw e; });
   }
 
   function manage() {
@@ -74,7 +113,7 @@
     if (!form) return;
     try { localStorage.setItem(ADMIN_KEY, "1"); } catch (e) {}
     var day = document.getElementById("sp-day"), msg = document.getElementById("sp-msg"), out = document.getElementById("sp-list");
-    var prev = document.getElementById("sp-prev"), photo = null, ref = null, count = 0;
+    var prev = document.getElementById("sp-prev"), photo = null, ref = null, count = 0, seq = 0, busy = false;
     var add = form.querySelector("button[type=submit]");
     function say(t) { msg.textContent = t; }
     if (!d) { say("Không kết nối được, kiểm tra mạng."); return; }
@@ -100,22 +139,23 @@
     }
     day.onchange = watch; watch();
     document.getElementById("sp-file").onchange = function () {
-      var f = this.files[0]; photo = null; prev.hidden = true; if (!f) return;
+      var f = this.files[0]; var my = ++seq; photo = null; prev.hidden = true; if (!f) return; busy = true;
       say("Đang xử lý ảnh...");
-      shrink(f, function (u) { if (!u) { say("Không đọc được ảnh này, chọn ảnh khác."); return; } photo = u; prev.src = u; prev.hidden = false; say(""); });
+      shrink(f, function (u) { if (my !== seq) return; busy = false; if (!u) { say("Không đọc được ảnh này (" + f.name + "). Chọn ảnh JPG, PNG hoặc chụp màn hình ảnh đó rồi chọn lại."); return; } photo = u; prev.src = u; prev.hidden = false; say("✓ Đã có ảnh. Bấm nút + Thêm món để lưu."); });
     };
     form.onsubmit = function (e) {
       e.preventDefault();
       var v = function (id) { return document.getElementById(id).value.trim(); };
       var it = { lo: v("sp-lo"), en: v("sp-en"), vi: v("sp-vi"), price: v("sp-price"), at: Date.now() };
       if (count >= SLOTS) { say("Ngày này đã đủ " + SLOTS + " món."); return; }
-      if (!it.lo && !it.en && !it.vi) { say("Nhập ít nhất một tên món."); return; }
-      if (!photo) { say("Chọn ảnh món."); return; }
-      it.photo = photo; say("Đang lưu...");
+      if (busy) { say("Ảnh đang xử lý, chờ vài giây rồi bấm lại."); return; }
+      if (!photo) { say("Chưa có ảnh. Bấm ô Chọn ảnh món ở trên."); return; }
+      it.photo = photo; say("Đang lưu..."); add.disabled = true;
+      var slow = setTimeout(function () { say("Mạng chậm, vẫn đang lưu..."); }, 8000);
       var keep = day.value;
-      d.ref("specials/" + keep).push(it).then(function () {
-        form.reset(); day.value = keep; photo = null; prev.hidden = true; say("✓ Đã thêm. Trang chủ hiện món này vào ngày " + keep + ".");
-      }).catch(function (er) { say("Không lưu được: " + er.message); });
+      save("specials/" + keep + "/" + d.ref("specials").push().key, it, 3).then(function () {
+        clearTimeout(slow); add.disabled = count >= SLOTS; form.reset(); day.value = keep; photo = null; prev.hidden = true; say("✓ Đã thêm. Trang chủ hiện món này vào ngày " + keep + ".");
+      }).catch(function (er) { clearTimeout(slow); add.disabled = false; say("Không lưu được: " + er.message); });
     };
   }
   document.addEventListener("DOMContentLoaded", function () { home(); manage(); });
